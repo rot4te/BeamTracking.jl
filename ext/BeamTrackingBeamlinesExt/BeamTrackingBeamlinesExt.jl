@@ -6,6 +6,12 @@ using BeamTracking: beta_gamma_to_v, make_kernel_call, KernelChain, push, TimeDe
                     mean_and_cov, ibs_integrals, push_transforms_in, push_transforms_out, @set
                     
 import BeamTracking: track!
+# CSR (copied from CSR.jl 6c73ad8): the types are in BeamTracking (src/csr/types.jl), the
+# computation here, so that it can use Beamlines.scalarize
+import BeamTracking: FloorPosition, CSRElementInfo, CSRGeometry, CSRKickPoint, CSRKick1, CSRBins,
+                     CSRStepResult, CSRSettings, CSRRecord, CSREffect, CSRReplay, with_fields,
+                     N_BIN_QUAD, number_type
+import Atomix
 
 function track!( 
   bunch::Bunch, 
@@ -81,5 +87,25 @@ include("implicit_bl.jl")
 include("exact_bl.jl")
 include("rk4_bl.jl")
 include("sagancavity_bl.jl")
+
+include("csr/utils/math.jl")
+include("csr/utils/backend.jl")
+include("csr/utils/spline.jl")
+include("csr/utils/floor.jl")
+include("csr/utils/chord_coordinates.jl")
+include("csr/utils/root_finding.jl")
+include("csr/utils/image_layers.jl")
+include("csr/utils/kick_setup.jl")
+include("csr/geometry.jl")
+include("csr/binning.jl")
+include("csr/tables.jl")
+include("csr/kick.jl")
+include("csr/reference.jl")
+include("csr/kernels/binning.jl")
+include("csr/kernels/source_point.jl")
+include("csr/kernels/wake.jl")
+include("csr/kernels/image_charges.jl")
+include("csr/kernels/convolve.jl")
+include("csr/kernels/kick.jl")
 
 end

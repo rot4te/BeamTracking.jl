@@ -26,6 +26,7 @@ export Species
 export Bunch, State, ParticleView, Time, TimeDependentParam, BatchParam
 export TrackPoint, transforms_out!, transforms_in!
 export track!
+export CSRSettings, CSREffect, CSRRecord, CSRReplay
 
 include("utils/float32.jl")
 include("utils/coord_transforms.jl")
@@ -60,6 +61,8 @@ include("kernels/spin.jl")
 include("kernels/transforms.jl")
 include("kernels/integrators.jl")
 include("kernels/ibs_kick.jl")
+# CSR types (the computation is in the Beamlines extension, ext/BeamTrackingBeamlinesExt/csr)
+include("csr/types.jl")
 include("kernels/implicit.jl")
 include("kernels/thin.jl")
 include("kernels/fringe.jl")
